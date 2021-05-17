@@ -10,10 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Spotify Artist Search',
-      /*theme: ThemeData(
-        primarySwatch: Color(0xFF121212),
-      ),*/
-      home: MyHomePage(title: 'Spotify Artist Search'),
+      home: SpotifyArtistHomePage(title: 'Spotify Artist Search'),
     );
   }
 }
