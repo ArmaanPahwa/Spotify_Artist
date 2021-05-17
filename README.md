@@ -3,15 +3,14 @@
 Mobile app creation for searching and view Spotify Artists using Flutter. Created by Armaan Pahwa
 
 ## Current Functionality
-- App bar on launch
+- Home page
 
 ## Current Development
-- Home page
+- Search menu functionality
 
 ## To-Do
 - Create Splash Page
 - Create API Services
-- Create search bar
 - Create Artist object
 - Create Artist view page
 - Quality of life changes

@@ -41,11 +41,15 @@ class DataSearch extends SearchDelegate<String> {
     "Entry 3",
     "Entry 4",
     "Entry 5",
+    "Artist 1",
+    "Artist 2",
+    "Artist 3",
   ];
 
   var suggestedEntries = [
     "Entry 1",
     "Entry 2",
+    "Artist 1",
   ];
 
   //Creates the clear search query
@@ -73,8 +77,17 @@ class DataSearch extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    // TODO: implement buildResults
-    throw UnimplementedError();
+    final dataResults = entries.where(
+      (entry) => entry.toLowerCase().contains(query.toLowerCase()),
+    );
+
+    return ListView.builder(
+      itemBuilder: (context, index) => ListTile(
+        leading: Icon(Icons.music_note),
+        title: Text(dataResults.elementAt(index)),
+      ),
+      itemCount: dataResults.length,
+    );
   }
 
   @override
