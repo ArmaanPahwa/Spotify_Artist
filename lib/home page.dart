@@ -83,8 +83,9 @@ class DataSearch extends SearchDelegate<String> {
 
     return ListView.builder(
       itemBuilder: (context, index) => ListTile(
-        leading: Icon(Icons.music_note),
+        leading: Icon(Icons.person_search),
         title: Text(dataResults.elementAt(index)),
+        onTap: () {},
       ),
       itemCount: dataResults.length,
     );
@@ -92,12 +93,13 @@ class DataSearch extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final suggestionList = query.isEmpty ? suggestedEntries : entries;
+    final suggestionList = suggestedEntries;
 
     return ListView.builder(
       itemBuilder: (context, index) => ListTile(
-        leading: Icon(Icons.music_note),
+        leading: Icon(Icons.update),
         title: Text(suggestionList[index]),
+        onTap: () {},
       ),
       itemCount: suggestionList.length,
     );
