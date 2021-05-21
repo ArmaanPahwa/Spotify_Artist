@@ -7,10 +7,10 @@ Mobile app creation for searching and view Spotify Artists using Flutter. Create
 
 ## Current Development
 - Search menu functionality
+- API Authentication
 
 ## To-Do
 - Create Splash Page
-- Create API Services
 - Create Artist object
 - Create Artist view page
 - Quality of life changes
@@ -23,7 +23,10 @@ Mobile app creation for searching and view Spotify Artists using Flutter. Create
 - Run the `main.dart` file using `Dart and Flutter` and interact with application on connected device.
 
 ## Packages
-Current, no packages are being used.
+Packages can be installed through running the `flutter pub get` as long as packages are listed as dependencies in the `pubspec.yaml` file
+- [http](https://pub.dev/packages/http)
+- [DotEnv](https://pub.dev/packages/flutter_dotenv)
+- [spotify_sdk](https://pub.dev/packages/spotify_sdk)
 
 ## Technologies Used
 - [Flutter](https://flutter.dev/): Cross platform mobile app SDK
@@ -32,8 +35,3 @@ Current, no packages are being used.
 ## References
 - [Flutter documentation](https://flutter.dev/docs)
 - [Flutter examples](https://flutter.dev/docs/cookbook)
-
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
