@@ -12,7 +12,7 @@ Installing Swift/Xcode on a copy of this repo _SHOULD_ allow for seamless iOS co
 - Search menu past searches (Resets on return to home page)
 
 ## Current Development
-- Create Artist information page
+- Artist Information Page information display
 
 ## To-Do
 - Home Page refactoring
