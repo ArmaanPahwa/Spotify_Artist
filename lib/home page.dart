@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:spotify_artist/api-connection/spotify_auth.dart';
 import 'package:spotify_artist/api-connection/authorization_token.dart';
 import 'package:spotify_artist/api-connection/spotify_api_search.dart';
-import 'package:spotify_artist/data-models/artist.dart';
 
 class SpotifyArtistHomePage extends StatefulWidget {
   SpotifyArtistHomePage({Key key, this.title}) : super(key: key);
@@ -81,7 +80,7 @@ class DataSearch extends SearchDelegate<String> {
   Widget buildResults(BuildContext context) {
     if (query == "") {
       return Center(
-        child: Text('Please enter a valid name'),
+        child: Text('Please enter an artist name above'),
       );
     }
     return FutureBuilder(
@@ -108,10 +107,14 @@ class DataSearch extends SearchDelegate<String> {
             );
           } else {
             return ListView.builder(
-              itemBuilder: (context, index) => ListTile(
-                leading: Icon(Icons.person_search),
-                title: Text(snapshot.data[index].getArtistName()),
-                onTap: () {},
+              itemBuilder: (context, index) => Padding(
+                padding: EdgeInsets.only(top: 8, bottom: 8),
+                child: ListTile(
+                  leading:
+                      Image.network(snapshot.data[index].getArtistImageUrl()),
+                  title: Text(snapshot.data[index].getArtistName()),
+                  onTap: () {},
+                ),
               ),
               itemCount: snapshot.data.length,
             );
