@@ -5,7 +5,7 @@ class Artist {
 
   factory Artist.fromJson(Map json) {
     //Frame for artist factory. To be edited later.
-    return Artist(json['artists']['items'][0]['name']);
+    return Artist(json['name']);
   }
 
   String getArtistName() {
