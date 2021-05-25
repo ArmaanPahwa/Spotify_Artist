@@ -9,12 +9,12 @@ Installing Swift/Xcode on a copy of this repo _SHOULD_ allow for seamless iOS co
 - API Authentication
 - Artist objects
 - Search Menu Results
+- Search menu past searches (Resets on return to home page)
 
 ## Current Development
-- Search menu past searches
+- Create Artist information page
 
 ## To-Do
-- Create Artist information page
 - Home Page refactoring
 
 ## How to Use

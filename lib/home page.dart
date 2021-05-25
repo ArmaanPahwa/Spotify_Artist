@@ -40,9 +40,7 @@ class _SpotifyArtistHomePage extends State<SpotifyArtistHomePage> {
 
 class DataSearch extends SearchDelegate<String> {
   var suggestedEntries = [
-    "Entry 1",
-    "Entry 2",
-    "Artist 1",
+    "John Mayer",
   ];
 
   Future<List> _buildAPIResults() async {
@@ -78,11 +76,15 @@ class DataSearch extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
+    query = query.trim();
     if (query == "") {
       return Center(
         child: Text('Please enter an artist name above'),
       );
     }
+
+    if (!suggestedEntries.contains(query)) suggestedEntries.add(query);
+
     return FutureBuilder(
         future: _buildAPIResults(),
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
@@ -110,8 +112,11 @@ class DataSearch extends SearchDelegate<String> {
               itemBuilder: (context, index) => Padding(
                 padding: EdgeInsets.only(top: 8, bottom: 8),
                 child: ListTile(
-                  leading:
-                      Image.network(snapshot.data[index].getArtistImageUrl()),
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(300),
+                    child:
+                        Image.network(snapshot.data[index].getArtistImageUrl()),
+                  ),
                   title: Text(snapshot.data[index].getArtistName()),
                   onTap: () {},
                 ),
@@ -130,9 +135,20 @@ class DataSearch extends SearchDelegate<String> {
       itemBuilder: (context, index) => ListTile(
         leading: Icon(Icons.update),
         title: Text(suggestionList[index]),
-        onTap: () {},
+        onTap: () {
+          query = suggestionList[index];
+        },
       ),
       itemCount: suggestionList.length,
     );
+  }
+
+  @override
+  ThemeData appBarTheme(BuildContext buildContext) {
+    assert(buildContext != null);
+    final ThemeData theme = Theme.of(buildContext);
+    assert(theme != null);
+    return ThemeData(
+        primaryColor: Color(0xFF1DB954), brightness: Brightness.dark);
   }
 }
