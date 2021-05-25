@@ -1,23 +1,24 @@
 # spotify_artist
 
-Mobile app creation for searching and view Spotify Artists using Flutter. Created by Armaan Pahwa
+Mobile app creation for searching and view Spotify Artists using Flutter. Created by Armaan Pahwa. 
+This project has only been run and test on Andriod, as it was developed on a Windows OS.
+Installing Swift/Xcode on a copy of this repo _SHOULD_ allow for seamless iOS compatability, but it is currently untested.
 
 ## Current Functionality
 - Home page
 - API Authentication
+- Artist objects
+- Search Menu Results
+- Search menu past searches (Resets on return to home page)
 
 ## Current Development
-- Search menu functionality
-- Create Artist object
+- Create Artist information page
 
 ## To-Do
-- Create Splash Page
-- Create Artist view page
-- Quality of life changes
-- UI/UX refactoring
+- Home Page refactoring
 
 ## How to Use
-- In order to use this application, you must ensure that [Flutter](https://flutter.dev/) and [Andriod Studio](https://developer.android.com/studio/) are installed.
+- In order to use this application from the source code, you must ensure that [Flutter](https://flutter.dev/) and [Andriod Studio](https://developer.android.com/studio/) are installed.
 - Once installed, ensure all packages listed below are installed.
 - Open this in any IDE and ensure there is a connection to an Andriod device or Andriod emulator.
 - Run the `main.dart` file using `Dart and Flutter` and interact with application on connected device.
@@ -34,3 +35,4 @@ Packages can be installed through running the `flutter pub get` as long as packa
 ## References
 - [Flutter documentation](https://flutter.dev/docs)
 - [Flutter examples](https://flutter.dev/docs/cookbook)
+- [TL Dev Tech](https://www.tldevtech.com/flutter-futurebuilder-with-listview-example/): Flutter FutureBuilder with ListView

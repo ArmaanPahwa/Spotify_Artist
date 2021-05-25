@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'package:spotify_artist/api-connection/spotify_auth.dart';
+import 'package:spotify_artist/api-connection/authorization_token.dart';
+import 'package:spotify_artist/api-connection/spotify_api_search.dart';
+
 class SpotifyArtistHomePage extends StatefulWidget {
   SpotifyArtistHomePage({Key key, this.title}) : super(key: key);
 
@@ -35,22 +39,17 @@ class _SpotifyArtistHomePage extends State<SpotifyArtistHomePage> {
 }
 
 class DataSearch extends SearchDelegate<String> {
-  var entries = [
-    "Entry 1",
-    "Entry 2",
-    "Entry 3",
-    "Entry 4",
-    "Entry 5",
-    "Artist 1",
-    "Artist 2",
-    "Artist 3",
+  var suggestedEntries = [
+    "John Mayer",
   ];
 
-  var suggestedEntries = [
-    "Entry 1",
-    "Entry 2",
-    "Artist 1",
-  ];
+  Future<List> _buildAPIResults() async {
+    AuthorizationToken authorizationToken =
+        await SpotifyAuth.getAuthenticationToken();
+    var artistList =
+        await SpotifyApiSearch.getArtistSearchList(authorizationToken, query);
+    return artistList;
+  }
 
   //Creates the clear search query
   @override
@@ -77,18 +76,55 @@ class DataSearch extends SearchDelegate<String> {
 
   @override
   Widget buildResults(BuildContext context) {
-    final dataResults = entries.where(
-      (entry) => entry.toLowerCase().contains(query.toLowerCase()),
-    );
+    query = query.trim();
+    if (query == "") {
+      return Center(
+        child: Text('Please enter an artist name above'),
+      );
+    }
 
-    return ListView.builder(
-      itemBuilder: (context, index) => ListTile(
-        leading: Icon(Icons.person_search),
-        title: Text(dataResults.elementAt(index)),
-        onTap: () {},
-      ),
-      itemCount: dataResults.length,
-    );
+    if (!suggestedEntries.contains(query)) suggestedEntries.add(query);
+
+    return FutureBuilder(
+        future: _buildAPIResults(),
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            List<Widget> children = const <Widget>[
+              SizedBox(
+                child: CircularProgressIndicator(),
+                width: 60,
+                height: 60,
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 16),
+                child: Text('Search in progress...'),
+              )
+            ];
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: children,
+              ),
+            );
+          } else {
+            return ListView.builder(
+              itemBuilder: (context, index) => Padding(
+                padding: EdgeInsets.only(top: 8, bottom: 8),
+                child: ListTile(
+                  leading: ClipRRect(
+                    borderRadius: BorderRadius.circular(300),
+                    child:
+                        Image.network(snapshot.data[index].getArtistImageUrl()),
+                  ),
+                  title: Text(snapshot.data[index].getArtistName()),
+                  onTap: () {},
+                ),
+              ),
+              itemCount: snapshot.data.length,
+            );
+          }
+        });
   }
 
   @override
@@ -99,9 +135,20 @@ class DataSearch extends SearchDelegate<String> {
       itemBuilder: (context, index) => ListTile(
         leading: Icon(Icons.update),
         title: Text(suggestionList[index]),
-        onTap: () {},
+        onTap: () {
+          query = suggestionList[index];
+        },
       ),
       itemCount: suggestionList.length,
     );
+  }
+
+  @override
+  ThemeData appBarTheme(BuildContext buildContext) {
+    assert(buildContext != null);
+    final ThemeData theme = Theme.of(buildContext);
+    assert(theme != null);
+    return ThemeData(
+        primaryColor: Color(0xFF1DB954), brightness: Brightness.dark);
   }
 }
