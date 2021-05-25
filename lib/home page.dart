@@ -119,8 +119,11 @@ class DataSearch extends SearchDelegate<String> {
                   ),
                   title: Text(snapshot.data[index].getArtistName()),
                   onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => ArtistPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                new ArtistPage(artist: snapshot.data[index])));
                   },
                 ),
               ),
