@@ -27,8 +27,26 @@ class _SpotifyArtistHomePage extends State<SpotifyArtistHomePage> {
         ],
       ),
       body: Center(
-        child: Text('Please use the search icon to begin your artist search',
-            style: TextStyle(fontSize: 16.0, color: Colors.white)),
+        child: Column(
+          children: [
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 30.0, horizontal: 22.0),
+              child: Container(
+                width: MediaQuery.of(context).size.width / 1.5,
+                height: MediaQuery.of(context).size.width / 1.5,
+                child: ClipRRect(
+                    borderRadius: BorderRadius.circular(30.0),
+                    child: Image.asset('assets/icon.jpeg')),
+              ),
+            ),
+            Text(
+              'Please use the search icon to begin your artist search',
+              style: TextStyle(fontSize: 20.0, color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -2,7 +2,7 @@
     package="com.example.spotify_artist">
    <application
         android:label="spotify_artist"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
