@@ -1,6 +1,6 @@
 # spotify_artist
 
-Mobile app creation for searching and view Spotify Artists using Flutter. Created by Armaan Pahwa. 
+Mobile app creation for searching and view Spotify Artists using Flutter. Created by Armaan Pahwa. Screenshots are located in the `screenshots` folder.
 This project has only been run and test on Andriod, as it was developed on a Windows OS.
 Installing Swift/Xcode on a copy of this repo _SHOULD_ allow for seamless iOS compatability, but it is currently untested.
 
