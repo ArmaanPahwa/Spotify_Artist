@@ -26,9 +26,11 @@ class _ArtistPageState extends State<ArtistPage> {
 }
 
 Widget getBody(Artist artist, var size) {
-  /*return Center(
-    child: Text('You have reached: ${artist.name} \'s page'),
-  );*/
+  double nameFontSize = 32.0;
+  double statisticTitleFontSize = 24.0;
+  double statisticDataFontSize = 20.0;
+  FontWeight statisticFontWeight = FontWeight.w400;
+
   return Center(
     child: Padding(
       padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 22.0),
@@ -38,16 +40,49 @@ Widget getBody(Artist artist, var size) {
               width: size.width / 1.5,
               height: size.width / 1.5,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(300),
+                borderRadius: BorderRadius.circular(200),
                 child: Image.network(artist.imageUrl),
               )),
           Padding(
-            padding: EdgeInsets.only(top: 20),
+            padding: EdgeInsets.only(top: 15, bottom: 10),
             child: Text(
               "${artist.name}",
-              style: TextStyle(fontSize: 28),
+              style: TextStyle(
+                  fontSize: nameFontSize, fontWeight: FontWeight.bold),
             ),
-          )
+          ),
+          Row(
+            children: [
+              Expanded(
+                  child: Column(
+                children: [
+                  Text("Followers",
+                      style: TextStyle(
+                          fontSize: statisticTitleFontSize,
+                          fontWeight: statisticFontWeight)),
+                  Text(
+                    "${artist.followers}",
+                    style: TextStyle(
+                        fontSize: statisticDataFontSize,
+                        fontWeight: statisticFontWeight),
+                  )
+                ],
+              )),
+              Expanded(
+                  child: Column(
+                children: [
+                  Text("Popularity",
+                      style: TextStyle(
+                          fontSize: statisticTitleFontSize,
+                          fontWeight: statisticFontWeight)),
+                  Text("${artist.popularity}",
+                      style: TextStyle(
+                          fontSize: statisticDataFontSize,
+                          fontWeight: statisticFontWeight)),
+                ],
+              ))
+            ],
+          ),
         ],
       ),
     ),
