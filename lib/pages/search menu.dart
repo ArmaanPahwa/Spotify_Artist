@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:spotify_artist/api-connection/spotify_auth.dart';
 import 'package:spotify_artist/api-connection/authorization_token.dart';
 import 'package:spotify_artist/api-connection/spotify_api_search.dart';
-import 'package:spotify_artist/artist%20page.dart';
+import 'package:spotify_artist/pages/artist%20page.dart';
 
 class SearchMenu extends SearchDelegate<String> {
   var suggestedEntries = [

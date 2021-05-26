@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:spotify_artist/search menu.dart';
+import 'package:spotify_artist/pages/search%20menu.dart';
 
 class SpotifyArtistHomePage extends StatefulWidget {
   final String title;
