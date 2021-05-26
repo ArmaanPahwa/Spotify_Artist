@@ -16,10 +16,10 @@ Installing Swift/Xcode on a copy of this repo _SHOULD_ allow for seamless iOS co
 - Artist Information Page information display
 
 ## Current Development
+- System refactoring
 
 ## To-Do
 - Home Page refactoring
-- System refactoring
 - UI/UX refactoring
 
 ## How to Use
