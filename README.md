@@ -3,11 +3,12 @@
 Mobile app creation for searching and view Spotify Artists using Flutter. Created by Armaan Pahwa. 
 This project has only been run and test on Andriod, as it was developed on a Windows OS.
 Installing Swift/Xcode on a copy of this repo _SHOULD_ allow for seamless iOS compatability, but it is currently untested.
+
 ## Features
 - Spotify Artist Searching
 - Modern Search Menu
 - Relevant Artist information page
-- Aritst Image onClick backdrop change
+- Aritst Image onClick backdrop change: Click Artist Image to change the backdrop
 
 ## Current Functionality
 - Home page
@@ -17,10 +18,13 @@ Installing Swift/Xcode on a copy of this repo _SHOULD_ allow for seamless iOS co
 - System refactoring
 
 ## Current Development
-
-## To-Do
 - Home Page refactoring
 - UI/UX refactoring
+
+## To-Do
+- User Testing
+- Seamless Image Loading
+- Universal Image Formatting
 
 ## How to Use
 - In order to use this application from the source code, you must ensure that [Flutter](https://flutter.dev/) and [Andriod Studio](https://developer.android.com/studio/) are installed.
