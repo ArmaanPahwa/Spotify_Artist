@@ -7,7 +7,11 @@ import 'package:spotify_artist/artist%20page.dart';
 class SearchMenu extends SearchDelegate<String> {
   var suggestedEntries = [
     "John Mayer",
+    "Aimer",
+    "Khalid",
   ];
+
+  var pastEntries = [];
 
   Future<List> _buildAPIResults() async {
     AuthorizationToken authorizationToken =
@@ -44,12 +48,10 @@ class SearchMenu extends SearchDelegate<String> {
   Widget buildResults(BuildContext context) {
     query = query.trim();
     if (query == "") {
-      return Center(
-        child: Text('Please enter an artist name above'),
-      );
+      return buildSuggestions(context);
     }
 
-    if (!suggestedEntries.contains(query)) suggestedEntries.add(query);
+    if (!pastEntries.contains(query)) pastEntries.add(query);
 
     return FutureBuilder(
         future: _buildAPIResults(),
@@ -101,11 +103,12 @@ class SearchMenu extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final suggestionList = suggestedEntries;
+    final suggestionList = pastEntries.isEmpty ? suggestedEntries : pastEntries;
 
     return ListView.builder(
       itemBuilder: (context, index) => ListTile(
-        leading: Icon(Icons.update),
+        leading:
+            pastEntries.isEmpty ? Icon(Icons.show_chart) : Icon(Icons.update),
         title: Text(suggestionList[index]),
         onTap: () {
           query = suggestionList[index];
