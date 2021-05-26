@@ -1,48 +1,19 @@
 import 'package:flutter/material.dart';
-
 import 'package:spotify_artist/api-connection/spotify_auth.dart';
 import 'package:spotify_artist/api-connection/authorization_token.dart';
 import 'package:spotify_artist/api-connection/spotify_api_search.dart';
-import 'package:spotify_artist/artist%20page.dart';
+import 'package:spotify_artist/pages/artist%20page.dart';
 
-class SpotifyArtistHomePage extends StatefulWidget {
-  SpotifyArtistHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  _SpotifyArtistHomePage createState() => _SpotifyArtistHomePage();
-}
-
-class _SpotifyArtistHomePage extends State<SpotifyArtistHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color(0xFF1DB954),
-        centerTitle: true,
-        title: Text(widget.title),
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.search),
-              onPressed: () {
-                showSearch(context: context, delegate: DataSearch());
-              }),
-        ],
-      ),
-      body: Center(
-        child: Text('Please use the search icon to begin your artist search',
-            style: TextStyle(fontSize: 16.0, color: Colors.white)),
-      ),
-    );
-  }
-}
-
-class DataSearch extends SearchDelegate<String> {
+class SearchMenu extends SearchDelegate<String> {
   var suggestedEntries = [
     "John Mayer",
+    "Aimer",
+    "Khalid",
   ];
 
+  var pastEntries = [];
+
+  //Promises to return a List, used in the buildResults() function for a FutureWidget
   Future<List> _buildAPIResults() async {
     AuthorizationToken authorizationToken =
         await SpotifyAuth.getAuthenticationToken();
@@ -74,16 +45,15 @@ class DataSearch extends SearchDelegate<String> {
         });
   }
 
+  //Creates a basic search icon while the _buildAPIResults() runs. Once it returns a list
+  //then the ListView is built
   @override
   Widget buildResults(BuildContext context) {
     query = query.trim();
     if (query == "") {
-      return Center(
-        child: Text('Please enter an artist name above'),
-      );
+      return buildSuggestions(context);
     }
-
-    if (!suggestedEntries.contains(query)) suggestedEntries.add(query);
+    if (!pastEntries.contains(query)) pastEntries.add(query);
 
     return FutureBuilder(
         future: _buildAPIResults(),
@@ -114,8 +84,13 @@ class DataSearch extends SearchDelegate<String> {
                 child: ListTile(
                   leading: ClipRRect(
                     borderRadius: BorderRadius.circular(300),
-                    child:
-                        Image.network(snapshot.data[index].getArtistImageUrl()),
+                    child: Image.network(
+                      snapshot.data[index].getArtistImageUrl(),
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return CircularProgressIndicator();
+                      },
+                    ),
                   ),
                   title: Text(snapshot.data[index].getArtistName()),
                   onTap: () {
@@ -133,13 +108,15 @@ class DataSearch extends SearchDelegate<String> {
         });
   }
 
+  //Builds the suggsestions / history
   @override
   Widget buildSuggestions(BuildContext context) {
-    final suggestionList = suggestedEntries;
+    final suggestionList = pastEntries.isEmpty ? suggestedEntries : pastEntries;
 
     return ListView.builder(
       itemBuilder: (context, index) => ListTile(
-        leading: Icon(Icons.update),
+        leading:
+            pastEntries.isEmpty ? Icon(Icons.show_chart) : Icon(Icons.update),
         title: Text(suggestionList[index]),
         onTap: () {
           query = suggestionList[index];
@@ -149,6 +126,7 @@ class DataSearch extends SearchDelegate<String> {
     );
   }
 
+  //Overrides the basic theme for the Searchdelegate
   @override
   ThemeData appBarTheme(BuildContext buildContext) {
     assert(buildContext != null);

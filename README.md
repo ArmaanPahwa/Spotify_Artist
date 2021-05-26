@@ -14,12 +14,12 @@ Installing Swift/Xcode on a copy of this repo _SHOULD_ allow for seamless iOS co
 - API Authentication
 - Search Menu
 - Artist Information Page information display
+- System refactoring
 
 ## Current Development
 
 ## To-Do
 - Home Page refactoring
-- System refactoring
 - UI/UX refactoring
 
 ## How to Use
@@ -32,6 +32,7 @@ Installing Swift/Xcode on a copy of this repo _SHOULD_ allow for seamless iOS co
 Packages can be installed through running the `flutter pub get` as long as packages are listed as dependencies in the `pubspec.yaml` file
 - [http](https://pub.dev/packages/http)
 - [DotEnv](https://pub.dev/packages/flutter_dotenv)
+- [cupertino_icons](https://pub.dev/packages/cupertino_icons)
 
 ## Technologies Used
 - [Flutter](https://flutter.dev/): Cross platform mobile app SDK
