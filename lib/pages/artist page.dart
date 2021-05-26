@@ -15,6 +15,7 @@ class ArtistPage extends StatefulWidget {
 class _ArtistPageState extends State<ArtistPage> {
   bool _defaultBack = true;
 
+  //Reloads the page with the updated information
   void _swapBackgroundType() {
     setState(() {
       _defaultBack = !_defaultBack;

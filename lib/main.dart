@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home page.dart';
+import 'pages/home page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
 
 void main() async {

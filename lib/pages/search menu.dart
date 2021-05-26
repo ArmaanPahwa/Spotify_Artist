@@ -13,6 +13,7 @@ class SearchMenu extends SearchDelegate<String> {
 
   var pastEntries = [];
 
+  //Promises to return a List, used in the buildResults() function for a FutureWidget
   Future<List> _buildAPIResults() async {
     AuthorizationToken authorizationToken =
         await SpotifyAuth.getAuthenticationToken();
@@ -44,13 +45,14 @@ class SearchMenu extends SearchDelegate<String> {
         });
   }
 
+  //Creates a basic search icon while the _buildAPIResults() runs. Once it returns a list
+  //then the ListView is built
   @override
   Widget buildResults(BuildContext context) {
     query = query.trim();
     if (query == "") {
       return buildSuggestions(context);
     }
-
     if (!pastEntries.contains(query)) pastEntries.add(query);
 
     return FutureBuilder(
@@ -106,6 +108,7 @@ class SearchMenu extends SearchDelegate<String> {
         });
   }
 
+  //Builds the suggsestions / history
   @override
   Widget buildSuggestions(BuildContext context) {
     final suggestionList = pastEntries.isEmpty ? suggestedEntries : pastEntries;
@@ -123,6 +126,7 @@ class SearchMenu extends SearchDelegate<String> {
     );
   }
 
+  //Overrides the basic theme for the Searchdelegate
   @override
   ThemeData appBarTheme(BuildContext buildContext) {
     assert(buildContext != null);
