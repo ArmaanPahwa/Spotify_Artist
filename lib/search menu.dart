@@ -82,8 +82,13 @@ class SearchMenu extends SearchDelegate<String> {
                 child: ListTile(
                   leading: ClipRRect(
                     borderRadius: BorderRadius.circular(300),
-                    child:
-                        Image.network(snapshot.data[index].getArtistImageUrl()),
+                    child: Image.network(
+                      snapshot.data[index].getArtistImageUrl(),
+                      loadingBuilder: (context, child, loadingProgress) {
+                        if (loadingProgress == null) return child;
+                        return CircularProgressIndicator();
+                      },
+                    ),
                   ),
                   title: Text(snapshot.data[index].getArtistName()),
                   onTap: () {

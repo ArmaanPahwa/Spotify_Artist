@@ -8,7 +8,7 @@ class Artist {
 
   factory Artist.fromJson(Map json) {
     String url = json['images'].isEmpty
-        ? 'https://picsum.photos/id/119/200/200'
+        ? 'https://i.postimg.cc/g0S6djR1/default-user.jpg'
         : json['images'][0]['url'];
     return Artist(
         json['name'], json['followers']['total'], url, json['popularity']);
