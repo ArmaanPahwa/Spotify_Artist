@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:spotify_artist/api-connection/spotify_auth.dart';
 import 'package:spotify_artist/api-connection/authorization_token.dart';
 import 'package:spotify_artist/api-connection/spotify_api_search.dart';
+import 'package:spotify_artist/artist%20page.dart';
 
 class SpotifyArtistHomePage extends StatefulWidget {
   SpotifyArtistHomePage({Key key, this.title}) : super(key: key);
@@ -17,7 +18,6 @@ class _SpotifyArtistHomePage extends State<SpotifyArtistHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF121212),
       appBar: AppBar(
         backgroundColor: Color(0xFF1DB954),
         centerTitle: true,
@@ -118,7 +118,13 @@ class DataSearch extends SearchDelegate<String> {
                         Image.network(snapshot.data[index].getArtistImageUrl()),
                   ),
                   title: Text(snapshot.data[index].getArtistName()),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                new ArtistPage(artist: snapshot.data[index])));
+                  },
                 ),
               ),
               itemCount: snapshot.data.length,
